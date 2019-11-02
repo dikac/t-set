@@ -1,2 +1,2 @@
 # t-set
-Typescript set
+typescript set
