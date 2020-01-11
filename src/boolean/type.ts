@@ -1,8 +1,8 @@
-import TypeObject from "t-object/boolean/type";
-import SymbolToString from "t-object/boolean/symbol-to-string";
-import SymbolIterator from "t-object/boolean/symbol-iterator";
-import Methods from "t-object/boolean/methods";
-import Properties from "t-object/boolean/properties";
+import TypeObject from "@dikac/t-object/boolean/type";
+import SymbolToString from "@dikac/t-object/boolean/symbol-to-string";
+import SymbolIterator from "@dikac/t-object/boolean/symbol-iterator";
+import Methods from "@dikac/t-object/boolean/methods";
+import Properties from "@dikac/t-object/boolean/properties";
 
 export default function Type<Value = any> (value : any) : value is Set<Value> {
 
