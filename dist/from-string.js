@@ -9,8 +9,8 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    function FromString(source, delimiter, target = null) {
-        if (target === null) {
+    function FromString(source, delimiter, target) {
+        if (!target) {
             target = new Set();
         }
         for (let val of source.split(delimiter)) {

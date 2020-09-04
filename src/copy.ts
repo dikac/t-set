@@ -1,9 +1,7 @@
-export default function Copy<V>(source : Set<V>, destination : null|Set<V> = null) : Set<V> {
-
-    if(destination === null) {
-
-        destination = new Set<V>();
-    }
+export default function Copy<V>(
+    source : Set<V>,
+    destination : Set<V>
+) : Set<V> {
 
     for(let value of source) {
 

@@ -1,6 +1,10 @@
-export default function FromString(source : string, delimiter : string|RegExp, target : null|Set<string> = null) : Set<string> {
+export default function FromString(
+    source : string,
+    delimiter : string|RegExp,
+    target ?: Set<string>
+) : Set<string> {
 
-    if(target === null) {
+    if(!target) {
 
         target = new Set<string>();
     }

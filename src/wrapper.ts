@@ -18,59 +18,59 @@ export default class Wrapper <T, Container extends Set<T> = Set<T>> implements S
         return this._set;
     }
 
-    [Symbol.iterator](): IterableIterator<T>
-    {
+    [Symbol.iterator](): IterableIterator<T> {
+
         return this._set[Symbol.iterator]();
     }
 
-    entries(): IterableIterator<[T, T]>
-    {
+    entries(): IterableIterator<[T, T]> {
+
         return this._set.entries();
     }
 
-    keys(): IterableIterator<T>
-    {
+    keys(): IterableIterator<T> {
+
         return this._set.keys();
     }
 
-    forEach(callbackfn: (value: T, value2: T, set: Set<T>) => void, thisArg?: any): void
-    {
+    forEach(callbackfn: (value: T, value2: T, set: Set<T>) => void, thisArg?: any): void {
+
         this._set.forEach(callbackfn, thisArg);
     }
 
-    values(): IterableIterator<T>
-    {
+    values(): IterableIterator<T> {
+
         return this._set.values();
     }
 
-    add(value: T) : this
-    {
+    add(value: T) : this {
+
         this._set.add(value);
         return this;
     }
 
-    clear(): void
-    {
+    clear(): void {
+
         this._set.clear();
     }
 
-    delete(value: T): boolean
-    {
+    delete(value: T): boolean {
+
         return this._set.delete(value);
     }
 
-    get [Symbol.toStringTag](): string
-    {
+    get [Symbol.toStringTag](): string {
+
         return this._set[Symbol.toStringTag];
     }
 
-    get size(): number
-    {
+    get size(): number {
+
         return this._set.size;
     }
 
-    has(value: T): boolean
-    {
+    has(value: T): boolean {
+
         return this._set.has(value);
     }
 }

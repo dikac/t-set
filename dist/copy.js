@@ -9,10 +9,7 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    function Copy(source, destination = null) {
-        if (destination === null) {
-            destination = new Set();
-        }
+    function Copy(source, destination) {
         for (let value of source) {
             destination.add(value);
         }
