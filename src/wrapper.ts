@@ -3,8 +3,7 @@ export default class Wrapper <T, Container extends Set<T> = Set<T>> implements S
 
     private _set !: Container;
 
-    constructor(set: Container)
-    {
+    constructor(set: Container)  {
         this.setSet(set);
     }
 
