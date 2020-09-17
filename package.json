@@ -1,13 +1,13 @@
 {
   "name": "@dikac/t-set",
-  "version": "0.5.4",
+  "version": "0.6.0",
   "description": "Typescript set",
   "dependencies": {
     "@dikac/deployer": "^0.1.5",
-    "@dikac/t-array": "^0.24.0",
-    "@dikac/t-iterable": "^0.3.4",
-    "@dikac/t-object": "^0.34.0",
-    "@dikac/t-string": "^0.14.2"
+    "@dikac/t-array": "^0.25.0",
+    "@dikac/t-iterable": "^0.4.0",
+    "@dikac/t-object": "^0.35.0",
+    "@dikac/t-string": "^0.15.0"
   },
   "devDependencies": {
     "esm": "^3.2.25",
