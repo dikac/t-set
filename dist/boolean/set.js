@@ -1,34 +1,21 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+import TypeObject from "@dikac/t-object/boolean/object";
+import Properties from "@dikac/t-object/property/boolean/exists";
+import Iterable from "@dikac/t-iterable/boolean/iterable";
+import List from "@dikac/t-array/boolean/list";
+import Method from "@dikac/t-object/boolean/method";
+export default function Set(value) {
+    if (!TypeObject(value)) {
+        return false;
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "@dikac/t-object/boolean/object", "@dikac/t-object/property/boolean/exists", "@dikac/t-iterable/boolean/iterable", "@dikac/t-array/boolean/list", "@dikac/t-object/boolean/method"], factory);
+    if (!Iterable(value)) {
+        return false;
     }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    const object_1 = require("@dikac/t-object/boolean/object");
-    const exists_1 = require("@dikac/t-object/property/boolean/exists");
-    const iterable_1 = require("@dikac/t-iterable/boolean/iterable");
-    const list_1 = require("@dikac/t-array/boolean/list");
-    const method_1 = require("@dikac/t-object/boolean/method");
-    function Set(value) {
-        if (!object_1.default(value)) {
-            return false;
-        }
-        if (!iterable_1.default(value)) {
-            return false;
-        }
-        if (!list_1.default(['entries', 'keys', 'forEach', 'values', 'add', 'clear', 'delete', 'has', 'toString'], (property) => method_1.default(value, property))) {
-            return false;
-        }
-        if (!exists_1.default(value, 'size')) {
-            return false;
-        }
-        return true;
+    if (!List(['entries', 'keys', 'forEach', 'values', 'add', 'clear', 'delete', 'has', 'toString'], (property) => Method(value, property))) {
+        return false;
     }
-    exports.default = Set;
-});
+    if (!Properties(value, 'size')) {
+        return false;
+    }
+    return true;
+}
 //# sourceMappingURL=set.js.map

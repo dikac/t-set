@@ -10,6 +10,7 @@
     "@dikac/t-string": "^0.14.2"
   },
   "devDependencies": {
+    "esm": "^3.2.25",
     "@types/jasmine": "^3.5.14",
     "@types/node": "^12.12.58",
     "cpy-cli": "^3.1.1",
@@ -20,11 +21,11 @@
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "ts-cleaner": "^1.0.5",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.2"
   },
   "scripts": {
-    "spec-run-js": "jasmine --config=./jasmine.json",
-    "spec-run": "jasmine --reporter=jasmine-ts-console-reporter --config=./jasmine.json",
+    "spec-run-js": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine.json",
+    "spec-run": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine.json --reporter=jasmine-ts-console-reporter",
     "spec": "npm-run-all spec-compile spec-run",
     "spec-ensure-directory": "mkdirp dist-spec",
     "spec-compile": "npm-run-all spec-compile-script spec-cleanup",
