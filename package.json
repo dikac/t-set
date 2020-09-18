@@ -1,19 +1,19 @@
 {
   "name": "@dikac/t-set",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Typescript set",
   "dependencies": {
     "@dikac/deployer": "^0.1.5",
-    "@dikac/t-array": "^0.25.0",
-    "@dikac/t-iterable": "^0.4.0",
-    "@dikac/t-object": "^0.35.0",
-    "@dikac/t-string": "^0.15.0"
+    "@dikac/t-array": "^0.25.1",
+    "@dikac/t-iterable": "^0.4.1",
+    "@dikac/t-object": "^0.35.2",
+    "@dikac/t-string": "^0.15.1"
   },
   "devDependencies": {
-    "esm": "^3.2.25",
     "@types/jasmine": "^3.5.14",
-    "@types/node": "^12.12.58",
+    "@types/node": "^12.12.62",
     "cpy-cli": "^3.1.1",
+    "esm": "^3.2.25",
     "jasmine": "^3.6.1",
     "jasmine-ts-console-reporter": "^3.1.1",
     "json-properties-remover": "^0.1.2",

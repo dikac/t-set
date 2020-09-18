@@ -1,8 +1,6 @@
 import TypeObject from "@dikac/t-object/boolean/object";
-import Methods from "@dikac/t-object/boolean/method";
 import Properties from "@dikac/t-object/property/boolean/exists";
 import Iterable from "@dikac/t-iterable/boolean/iterable";
-import Symbol from "@dikac/t-object/symbol/boolean/symbol";
 import List from "@dikac/t-array/boolean/list";
 import Method from "@dikac/t-object/boolean/method";
 
