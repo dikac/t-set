@@ -1,29 +1,17 @@
-export default class TimeToLive<Type> implements Set<Type> {
+export default class TimeToLive<Type> extends Set<Type> {
     milliseconds: number;
-    private map;
-    private interval?;
-    private cleanupMilliseconds;
+    private timeouts;
     /**
      * @param milliseconds
      * time to live
      *
-     * @param cleanupMilliseconds
-     * automatic cleanup interval, set 0 to disable
+     * @param values
      */
-    constructor(milliseconds: number, cleanupMilliseconds: number);
-    set cleanup(milliseconds: number);
-    get cleanup(): number;
+    constructor(milliseconds: number, values?: readonly Type[]);
     get seconds(): number;
     set seconds(second: number);
-    get [Symbol.toStringTag](): string;
-    get size(): number;
-    [Symbol.iterator](): IterableIterator<Type>;
     add(value: Type): this;
+    private clearTimeout;
     clear(): void;
     delete(value: Type): boolean;
-    forEach(callbackfn: (value: Type, value2: Type, set: Set<Type>) => void, thisArg?: any): void;
-    has(value: Type): boolean;
-    entries(): IterableIterator<[Type, Type]>;
-    keys(): IterableIterator<Type>;
-    values(): IterableIterator<Type>;
 }

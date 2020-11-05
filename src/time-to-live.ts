@@ -1,49 +1,20 @@
-import {setInterval} from "timers";
 import Timeout = NodeJS.Timeout;
 
+export default class TimeToLive<Type> extends Set<Type> {
 
-export default class TimeToLive<Type> implements Set<Type> {
-
-    private map : Map<Type, number> = new Map<Type, number>();
-    private interval ?: Timeout;
-    private cleanupMilliseconds : number = 0;
+    private timeouts : Map<Type, Timeout> = new Map<Type, Timeout>();
 
     /**
      * @param milliseconds
      * time to live
      *
-     * @param cleanupMilliseconds
-     * automatic cleanup interval, set 0 to disable
+     * @param values
      */
     constructor(
         public milliseconds : number,
-        cleanupMilliseconds : number
+        values?: readonly Type[]
     ) {
-        this.cleanup = cleanupMilliseconds;
-    }
-
-    set cleanup(milliseconds : number) {
-
-        if(this.interval) {
-
-            clearInterval(this.interval);
-        }
-
-        if(milliseconds > 1) {
-
-            this.cleanupMilliseconds = milliseconds;
-
-            setInterval(()=>[...this], milliseconds);
-
-        } else {
-
-            this.cleanupMilliseconds = 0;
-        }
-    }
-
-    get cleanup() : number {
-
-        return this.cleanupMilliseconds;
+        super(values);
     }
 
     get seconds() : number {
@@ -56,88 +27,47 @@ export default class TimeToLive<Type> implements Set<Type> {
         this.milliseconds = second * 1000;
     }
 
-    get [Symbol.toStringTag](): string {
-
-        return this.map[Symbol.toStringTag];
-    }
-
-    get size () : number {
-
-        return this.map.size;
-    }
-
-    * [Symbol.iterator](): IterableIterator<Type> {
-
-        for(let [value] of this.map.entries()) {
-
-            if(this.has(value)) {
-
-                yield value
-            }
-        }
-    }
-
     add(value: Type): this {
 
-        this.map.set(value, new Date().getTime());
+        this.clearTimeout(value);
+
+        const timeout = setTimeout(()=>{
+
+            this.timeouts.delete(value);
+            super.delete(value);
+
+        }, this.milliseconds);
+
+        this.timeouts.set(value, timeout);
+        super.add(value);
+
         return this;
     }
 
-    clear(): void {
+    private clearTimeout(value: Type) : boolean {
 
-        this.map.clear();
-    }
+        const timeout = this.timeouts.get(value);
 
-    delete(value: Type): boolean {
+        if(timeout) {
 
-        return this.map.delete(value);
-    }
-
-    forEach(callbackfn: (value: Type, value2: Type, set: Set<Type>) => void, thisArg?: any): void {
-
-        this.map.forEach(
-            (value: number, key: Type, map: Map<Type, number>)=>callbackfn(key, key, this),
-            thisArg
-        )
-    }
-
-    has(value: Type): boolean {
-
-        let val = this.map.get(value);
-
-        if(val) {
-
-            if(this.milliseconds >= (new Date().getTime() - val)) {
-
-                return true;
-
-            } else {
-
-                this.map.delete(value);
-            }
+            clearTimeout(timeout);
+            return true;
         }
 
         return false;
     }
 
-    * entries(): IterableIterator<[Type, Type]> {
+    clear(): void {
 
-        for(let value of this) {
-
-            if(this.has(value)) {
-
-                yield [value, value]
-            }
-        }
+        this.timeouts.forEach(value => clearTimeout(value));
+        super.clear();
     }
 
-    * keys(): IterableIterator<Type> {
+    delete(value: Type): boolean {
 
-        yield * this;
+        this.clearTimeout(value);
+        this.timeouts.delete(value);
+        return super.delete(value);
     }
 
-    * values(): IterableIterator<Type> {
-
-        yield * this;
-    }
 }

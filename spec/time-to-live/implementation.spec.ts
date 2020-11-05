@@ -12,7 +12,7 @@ describe('has', ()=>{
         expect(ttl.has('a')).toBeTrue();
     });
 
-    it("delete", function(done) {
+    it("delete", function() {
         ttl.delete('a');
     });
 
