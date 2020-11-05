@@ -7,7 +7,7 @@ export default class RefreshInterval<Type> extends Set<Type> {
 
     constructor(
         milliseconds : number,
-        public callback : (set : Set<Type>) => void,
+        public callback : (set : RefreshInterval<Type>) => void,
         values?: readonly Type[]
     ) {
         super(values);

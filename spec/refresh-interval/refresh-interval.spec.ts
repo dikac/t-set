@@ -4,10 +4,15 @@ it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
 describe('has', ()=>{
 
-    let ttl = new RefreshInterval(2000, (set)=>{
+    let ttl : RefreshInterval<string>;
 
-        set.add('c')
-    })
+    it("add data", function() {
+
+        ttl = new RefreshInterval(2000, (set)=>{
+
+            set.add('c');
+        });
+    });
 
     it("add data", function() {
 
@@ -32,10 +37,15 @@ describe('has', ()=>{
 
 describe('iterator', ()=>{
 
-    let ttl = new RefreshInterval(2000, (set)=>{
+    let ttl : RefreshInterval<string>;
 
-        set.add('c')
-    })
+    it("add data", function() {
+
+        ttl = new RefreshInterval(2000, (set)=>{
+
+            set.add('c');
+        });
+    });
 
     it("add data", function() {
 
@@ -57,9 +67,14 @@ describe('iterator', ()=>{
 
 describe('values', ()=>{
 
-    let ttl = new RefreshInterval(2000, (set)=>{
+    let ttl : RefreshInterval<string>;
 
-        set.add('c')
+    it("add data", function() {
+
+        ttl = new RefreshInterval(2000, (set)=>{
+
+            set.add('c');
+        });
     });
 
     it("add data", function() {
@@ -82,9 +97,14 @@ describe('values', ()=>{
 
 describe('keys', ()=>{
 
-    let ttl = new RefreshInterval(2000, (set)=>{
+    let ttl : RefreshInterval<string>;
 
-        set.add('c')
+    it("add data", function() {
+
+        ttl = new RefreshInterval(2000, (set)=>{
+
+            set.add('c');
+        });
     });
 
     it("add data", function() {

@@ -1,0 +1,50 @@
+{
+    "name": "@dikac/t-set",
+    "version": "0.6.5",
+    "description": "Typescript set",
+    "dependencies": {
+        "@dikac/t-array": "^0.25.8",
+        "@dikac/t-iterable": "^0.4.1",
+        "@dikac/t-object": "^0.36.4",
+        "@dikac/t-string": "^0.15.3"
+    },
+    "devDependencies": {
+        "@types/jasmine": "^3.6.1",
+        "@types/node": "^12.19.3",
+        "cpy-cli": "^3.1.1",
+        "esm": "^3.2.25",
+        "jasmine": "^3.6.3",
+        "jasmine-ts-console-reporter": "^3.1.1",
+        "json-properties-remover": "^0.1.2",
+        "mkdirp": "^1.0.4",
+        "npm-run-all": "^4.1.5",
+        "rimraf": "^3.0.2",
+        "ts-cleaner": "^1.0.5",
+        "typescript": "^4.0.5"
+    },
+    "scripts": {
+        "spec-run-js": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine.json",
+        "spec-run": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine.json --reporter=jasmine-ts-console-reporter",
+        "spec": "npm-run-all spec-compile spec-run",
+        "spec-ensure-directory": "mkdirp dist-spec",
+        "spec-compile": "npm-run-all spec-compile-script spec-cleanup",
+        "spec-compile-watch": "npm-run-all --sequential spec-ensure-directory --parallel spec-compile-watch-script spec-cleanup-watch",
+        "spec-compile-script": "tsc -p tsconfig-spec.json",
+        "spec-compile-watch-script": "tsc -w -p tsconfig-spec.json",
+        "compile-script": "tsc",
+        "compile": "npm-run-all compile-script cleanup",
+        "cleanup": "ts-cleaner --verbose --dist=dist --src=src",
+        "cleanup-watch": "ts-cleaner --verbose --dist=dist --src=src --watch",
+        "spec-cleanup": "ts-cleaner --verbose --dist=dist-spec --src=spec",
+        "spec-cleanup-watch": "ts-cleaner --verbose --dist=dist-spec --src=spec --watch",
+        "compile-script-watch": "tsc -w",
+        "compile-watch": "npm-run-all --sequential compile-ensure-directory --parallel compile-script-watch cleanup-watch",
+        "compile-ensure-directory": "mkdirp dist",
+        "release": "remove-json-properties dist/package.json private scripts.postinstall scripts.deploy dependencies.@dikac/deployer",
+        "postrelease": "npm publish dist",
+        "prerelease": "cpy     package.json package-lock.json LICENSE Readme.md .npmignore dist",
+        "postpublish": "rimraf package.json package-lock.json LICENSE Readme.md .npmignore"
+    },
+    "author": "",
+    "license": "MIT"
+}
