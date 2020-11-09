@@ -2,7 +2,7 @@ import Timeout = NodeJS.Timeout;
 
 export default class RefreshInterval<Type> extends Set<Type> {
 
-    private interval !: Timeout;
+    private interval ?: Timeout;
     #milliseconds !: number;
 
     constructor(
@@ -12,6 +12,21 @@ export default class RefreshInterval<Type> extends Set<Type> {
     ) {
         super(values);
         this.milliseconds = milliseconds;
+    }
+
+    stop(): void{
+
+        if(this.interval) {
+
+            clearInterval(this.interval);
+            this.interval = undefined;
+        }
+    }
+
+    start(): void {
+
+        this.stop();
+        this.interval = setInterval(()=>this.callback(this), this.#milliseconds)
     }
 
     get seconds() : number {
@@ -31,13 +46,11 @@ export default class RefreshInterval<Type> extends Set<Type> {
 
     set milliseconds(milliseconds : number) {
 
-        if(this.interval) {
-
-            clearInterval(this.interval);
-        }
+        this.stop();
 
         this.#milliseconds = milliseconds;
-        this.interval = setInterval(()=>this.callback(this), milliseconds)
+
+        this.start()
     }
 
 }

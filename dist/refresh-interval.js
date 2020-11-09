@@ -19,6 +19,16 @@ export default class RefreshInterval extends Set {
         _milliseconds.set(this, void 0);
         this.milliseconds = milliseconds;
     }
+    stop() {
+        if (this.interval) {
+            clearInterval(this.interval);
+            this.interval = undefined;
+        }
+    }
+    start() {
+        this.stop();
+        this.interval = setInterval(() => this.callback(this), __classPrivateFieldGet(this, _milliseconds));
+    }
     get seconds() {
         return this.milliseconds / 1000;
     }
@@ -29,11 +39,9 @@ export default class RefreshInterval extends Set {
         return __classPrivateFieldGet(this, _milliseconds);
     }
     set milliseconds(milliseconds) {
-        if (this.interval) {
-            clearInterval(this.interval);
-        }
+        this.stop();
         __classPrivateFieldSet(this, _milliseconds, milliseconds);
-        this.interval = setInterval(() => this.callback(this), milliseconds);
+        this.start();
     }
 }
 _milliseconds = new WeakMap();
